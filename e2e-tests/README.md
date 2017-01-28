@@ -7,7 +7,7 @@ Continuous Integration
 [![prod](https://img.shields.io/jenkins/s/https/webqa-ci.mozilla.com/socorro.prod.svg?label=prod)](https://webqa-ci.mozilla.com/job/socorro.prod/)
 
 
-This directory holds Socorro client-based end-to-end tests which is why they're different than the rest of the code in this repository.
+This directory holds Socorro client-based end-to-end tests, which is why they're different than the rest of the code in this repository.
 
 To review the specific Python packages the tests utilize, please review `requirements.txt`.
 
@@ -17,17 +17,12 @@ Set up and run Socorro tests
 Review the documentation for [pytest-selenium][pytest-selenium] and decide which browser
 environment you wish to target.
 
-We suggest using a different virtual environment for these tests than the
-rest of Socorro so you're not mixing requirements:
+* [Install Tox](https://tox.readthedocs.io/en/latest/install.html)
+* Run `tox`
 
-	$ mkvirtualenv socorro-tests
-	$ # make sure you DON'T run the next command in
-	$ # your dev virtualenv.
-	$ pip install -r requirements.txt
+An additional constraint for Firefox users, with the release of Firefox 48, WebDriver support is currently broken until GeckoDriver is out of Alpha. We suggest using an older version of Firefox which can be [downloaded here][firefoxdownloads].
 
-An additional constraint for Firefox users, with the release of Firefox 48, Webdriver support is currently broken until GeckoDriver is out of Alpha. We suggest using an older version of Firefox which can be [downloaded here][firefoxdownloads].
-
-If you have multiple versions of Firefox installed, you can specifiy a specific one by using the `--firefox-path <path to firefox binary>` flag.
+If you have multiple versions of Firefox installed, you can specify one by using the `--firefox-path <path to firefox binary>` flag.
 
 ___Running the tests on stage___
 
@@ -40,7 +35,7 @@ ___Running tests against localhost___
 
 ___Running tests against production___
 
-	$ py.test --driver Firefox --base-url https://crash-stats.mozilla.com tests/
+	$ tox -e tests --base-url https://crash-stats.mozilla.com
 
 ___Running specific tests___
 
@@ -54,7 +49,7 @@ You can run tests that match a specific name:
 
 You can run tests whose names match a specific pattern:
 
-    $ py.test --driver Firefox -k test_search
+    $ tox -e tests -- -k test_search
 
 __Output__
 
@@ -75,14 +70,14 @@ __Note__
 "~" will not resolve to the home directory when used in the py.test command line.
 
 The pytest plugin that we use for running tests has a number of advanced
-command line options available. To see the options available, run
+command-line options available. To see the options available, run
 `py.test --help`. The full documentation for the plugin can be found
 [here][pytest-selenium].
 
 __Troubleshooting__
 
 If the test run hangs with Firefox open but no URL gets entered in the address
-box, some combinations of the Firefox version, and the python Selenium bindings
+box, some combinations of the Firefox version, and the Python Selenium bindings
 version may not be compatible. Upgrading each of them to latest often fixes it.
 
 Tips and tricks
@@ -108,7 +103,7 @@ Xvfb provides a fairly easily work around on Linux.
 
 On Linux:
 
-    Install Xvfb and run the tests with it's xvfb-run binary. For
+    Install Xvfb and run the tests with its xvfb-run binary. For
     example, if you run tests like::
 
         $ py.test ...
@@ -149,5 +144,5 @@ This software is licensed under the [MPL] 2.0:
 [Style Guide]: https://wiki.mozilla.org/QA/Execution/Web_Testing/Docs/Automation/StyleGuide
 [MPL]: http://www.mozilla.org/MPL/2.0/
 [pytest-selenium]: http://pytest-selenium.readthedocs.org/
-[firefoxdownloads]: https://ftp.mozilla.org/pub/firefox/releases/44.0.2/
+[firefoxdownloads]: https://ftp.mozilla.org/pub/firefox/releases/47.0.2/
 [test envs]: http://pytest-selenium.readthedocs.io/en/latest/user_guide.html#specifying-a-browser
