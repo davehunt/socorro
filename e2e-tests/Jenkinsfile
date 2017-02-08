@@ -1,6 +1,7 @@
 import groovy.json.JsonOutput
 
 /** Tox environment */
+def config = 'e2e-tests/tox.ini'
 def environment = 'tests'
 
 /** Map of desired capabilities */
@@ -43,7 +44,7 @@ def runTox(environment) {
           "--driver=SauceLabs " +
           "--variables=capabilities.json " +
           "--color=yes"]) {
-          sh "tox -e ${environment}"
+          sh "tox -c ${config} -e ${environment}"
         }
       }
     }
@@ -95,7 +96,7 @@ stage('Lint') {
     timestamps {
       deleteDir()
       unstash 'workspace'
-      sh 'tox -e flake8'
+      sh 'tox -c ${config} -e flake8'
     }
   }
 }
@@ -147,8 +148,8 @@ try {
         reportDir: 'results',
         reportFiles: "${environment}.html",
         reportName: 'HTML Report'])
-      junit 'results/*.xml'
-      archiveArtifacts 'results/*'
+      junit 'e2e-tests/results/*.xml'
+      archiveArtifacts 'e2e-tests/results/*'
     }
   }
 }
