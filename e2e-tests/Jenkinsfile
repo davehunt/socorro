@@ -86,7 +86,7 @@ stage('Checkout') {
     timestamps {
       deleteDir()
       checkout scm
-      stash 'workspace'
+      stash name: 'workspace'
     }
   }
 }
