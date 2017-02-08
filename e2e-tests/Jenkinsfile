@@ -96,7 +96,7 @@ stage('Lint') {
     timestamps {
       deleteDir()
       unstash 'workspace'
-      sh 'tox -c ${config} -e flake8'
+      sh "tox -c ${config} -e flake8"
     }
   }
 }
