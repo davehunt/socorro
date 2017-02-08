@@ -30,7 +30,7 @@ def writeCapabilities(desiredCapabilities) {
  *
  * @param environment test environment to run
 */
-def runTox(environment) {
+def runTox(config, environment) {
   def options = env.PYTEST_ADDOPTS ?: ''
   def processes = env.PYTEST_PROCESSES ?: 'auto'
   try {
@@ -110,7 +110,7 @@ try {
           unstash 'workspace'
           try {
             writeCapabilities(capabilities)
-            runTox(environment)
+            runTox(config, environment)
           } catch(err) {
             currentBuild.result = 'FAILURE'
             throw err
