@@ -20,9 +20,9 @@ environment you wish to target.
 * [Install Tox](https://tox.readthedocs.io/en/latest/install.html)
 * Run `tox`
 
-An additional constraint for Firefox users, with the release of Firefox 48, WebDriver support is currently broken until GeckoDriver is out of Alpha. We suggest using an older version of Firefox which can be [downloaded here][firefoxdownloads].
+An additional constraint for Firefox users: with the release of Firefox 48, WebDriver support is currently broken until GeckoDriver is out of Alpha. We suggest using Firefox 47.0.2 which can be [downloaded here][firefoxdownloads].
 
-If you have multiple versions of Firefox installed, you can specify one by using the `--firefox-path <path to firefox binary>` flag.
+If you have multiple versions of Firefox installed, you can specify a specific one by using the `--firefox-path <path to firefox binary>` flag.
 
 ___Running the tests on stage___
 
