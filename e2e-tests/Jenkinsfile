@@ -52,9 +52,7 @@ def runTox(config, environment) {
     currentBuild.result = 'FAILURE'
     throw err
   } finally {
-    dir('results') {
-      stash environment
-    }
+    stash name: environment, includes: 'e2e-tests/results/**'
   }
 }
 
@@ -115,9 +113,7 @@ try {
             currentBuild.result = 'FAILURE'
             throw err
           } finally {
-            dir('results') {
-              stash environment
-            }
+            stash name: environment, includes: 'e2e-tests/results/**'
           }
         }
       }
@@ -137,15 +133,12 @@ try {
   stage('Results') {
     node {
       deleteDir()
-      sh 'mkdir results'
-      dir('results') {
-        unstash environment
-      }
+      unstash environment
       publishHTML(target: [
         allowMissing: false,
         alwaysLinkToLastBuild: true,
         keepAll: true,
-        reportDir: 'results',
+        reportDir: 'e2e-tests/results',
         reportFiles: "${environment}.html",
         reportName: 'HTML Report'])
       junit 'e2e-tests/results/*.xml'
