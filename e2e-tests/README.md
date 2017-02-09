@@ -9,7 +9,7 @@ Continuous Integration
 
 This directory holds Socorro client-based end-to-end tests, which is why they're different than the rest of the code in this repository.
 
-To review the specific Python packages the tests utilize, please review `requirements.txt`.
+To review the specific Python packages the tests utilize, please review `tox.ini`.
 
 Set up and run Socorro tests
 -----------------------------
@@ -26,7 +26,7 @@ If you have multiple versions of Firefox installed, you can specify one by using
 
 ___Running the tests on stage___
 
-	$ py.test --driver Firefox tests/
+	$ tox
 
 ___Running tests against localhost___
 
@@ -35,17 +35,17 @@ ___Running tests against localhost___
 
 ___Running tests against production___
 
-	$ tox -e tests --base-url https://crash-stats.mozilla.com
+	$ tox -e tests -- --base-url https://crash-stats.mozilla.com
 
 ___Running specific tests___
 
 You can run tests in a given file::
 
-    $ py.test --driver Firefox tests/desktop/test_search.py
+    $ tox -e tests -- tests/test_search.py
 
 You can run tests that match a specific name:
 
-    $ py.test --driver Firefox -k test_search_for_unrealistic_data
+    $ tox -e tests -- -k test_search_for_unrealistic_data
 
 You can run tests whose names match a specific pattern:
 
