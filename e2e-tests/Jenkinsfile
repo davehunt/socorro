@@ -23,7 +23,7 @@ def writeCapabilities(desiredCapabilities) {
     def capabilities = defaultCapabilities.clone()
     capabilities.putAll(desiredCapabilities)
     def json = JsonOutput.toJson([capabilities: capabilities])
-    writeFile file: 'capabilities.json', text: json
+    writeFile file: 'e2e-tests/capabilities.json', text: json
 }
 
 /** Run Tox
