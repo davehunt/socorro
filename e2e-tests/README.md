@@ -9,7 +9,7 @@ Continuous Integration
 
 This directory holds Socorro client-based end-to-end tests, which is why they're different than the rest of the code in this repository.
 
-To review the specific Python packages the tests utilize, please review `tox.ini`.
+To review the specific-Python packages the tests use, please review `tox.ini`.
 
 Set up and run Socorro tests
 -----------------------------
@@ -30,8 +30,8 @@ ___Running the tests on stage___
 
 ___Running tests against localhost___
 
-	$ py.test --driver Firefox --base-url http://localhost:8000 tests/
-	$ py.test --driver Firefox --firefox-path /path/to/firefox/binary --base-url http://localhost:8000 tests/
+	$ tox -e tests -- --driver Firefox --base-url http://localhost:8000 tests/
+	$ tox -e tests -- --driver Firefox --firefox-path /path/to/firefox/binary --base-url http://localhost:8000 tests/
 
 ___Running tests against production___
 
@@ -133,7 +133,7 @@ This software is licensed under the [MPL] 2.0:
 [firefoxtesteng]: https://quality.mozilla.org/teams/test-engineering/
 [firefox]: http://quality.mozilla.org/teams/desktop-firefox/
 [webdriver]: http://seleniumhq.org/docs/03_webdriver.html
-[mozwebqa]:http://02.chat.mibbit.com/?server=irc.mozilla.org&channel=#mozwebqa
+[fxtest]:http://02.chat.mibbit.com/?server=irc.mozilla.org&channel=#fx-test
 [GitWin]: http://help.github.com/win-set-up-git/
 [GitMacOSX]: http://help.github.com/mac-set-up-git/
 [GitLinux]: http://help.github.com/linux-set-up-git/
