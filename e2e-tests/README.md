@@ -20,7 +20,7 @@ environment you wish to target.
 * [Install Tox](https://tox.readthedocs.io/en/latest/install.html)
 * Run `tox`
 
-An additional constraint for Firefox users: with the release of Firefox 48, WebDriver support is currently broken until GeckoDriver is out of Alpha. We suggest using Firefox 47.0.2 which can be [downloaded here][firefoxdownloads].
+An additional constraint for Firefox users: since version 48, Firefox now uses GeckoDriver and the Marionette-backed WebDriver, which currently lacks feature parity with WebDriver.  In the interim (while those are being brought up to WebDriver specification), we recommend using Firefox 47.0.2 which can be [downloaded here][firefoxdownloads].
 
 If you have multiple versions of Firefox installed, you can specify a specific one by using the `--firefox-path <path to firefox binary>` flag.
 
@@ -30,12 +30,17 @@ ___Running the tests on stage___
 
 ___Running tests against localhost___
 
-	$ tox -e tests -- --driver Firefox --base-url http://localhost:8000 tests/
-	$ tox -e tests -- --driver Firefox --firefox-path /path/to/firefox/binary --base-url http://localhost:8000 tests/
+	$ export PYTEST_BASE_URL="http://localhost:8000"
+	$ tox -e tests
+
+	$ export PYTEST_BASE_URL="http://localhost:8000"
+	$ export PYTEST_ADDOPTS="--firefox-path=/path/to/firefox/binary"
+	$ tox -e tests
 
 ___Running tests against production___
 
-	$ tox -e tests -- --base-url https://crash-stats.mozilla.com
+	$ export PYTEST_BASE_URL="https://crash-stats.mozilla.com"
+	$ tox -e tests
 
 ___Running specific tests___
 
