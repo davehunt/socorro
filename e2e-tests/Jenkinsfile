@@ -1,4 +1,4 @@
-@Library('fxtest') _
+@Library('fxtest@1.0') _
 
 /** Desired capabilities */
 def capabilities = [
@@ -58,7 +58,8 @@ pipeline {
         to: "fte-ci@mozilla.com")
     }
     changed {
-      ircNotification()
+      ircNotification(channel='#breakpad')
+      ircNotification(channel='#fx-test-alerts')
     }
   }
 }
