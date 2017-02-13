@@ -58,7 +58,7 @@ pipeline {
         to: "fte-ci@mozilla.com")
     }
     changed {
-      ircNotification('#breakpad')
+      ircNotification('#services-test')
       ircNotification('#fx-test-alerts')
     }
   }
