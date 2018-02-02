@@ -1,13 +1,14 @@
 FROM python:2-alpine3.7
 
-ENV MOZ_HEADLESS=1
-
 RUN mkdir /opt
 RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories
 RUN apk --no-cache add \
+    bash \
     curl \
+    dbus \
     firefox@testing \
-    msttcorefonts-installer
+    msttcorefonts-installer \
+    xvfb
 
 RUN update-ms-fonts && fc-cache -f
 
